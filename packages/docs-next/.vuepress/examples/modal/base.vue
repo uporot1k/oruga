@@ -52,14 +52,18 @@
     </o-modal>
   </section>
 </template>
-
 <script>
-export default {
-  data() {
+import { defineComponent, ref } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const isImageModalActive = ref(false);
+    const isCardModalActive = ref(false);
+
     return {
-      isImageModalActive: false,
-      isCardModalActive: false,
+      isImageModalActive,
+      isCardModalActive
     };
   },
-};
+});
 </script>
