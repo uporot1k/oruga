@@ -17,20 +17,30 @@
 </template>
 
 <script>
-export default {
-  data() {
+import { defineComponent, ref } from 'vue'
+import { useProgrammatic } from '@oruga-ui/oruga-next';
+
+export default defineComponent({
+  setup() {
+    const { oruga } = useProgrammatic();
+
+    const element = ref(null);
+    const isFullPage = ref(true);
+
+    function openLoading() {
+      const loadingComponent = oruga.loading.open({
+        fullPage: isFullPage.value,
+        container: isFullPage.value ? null : element.value
+      });
+
+      setTimeout(() => loadingComponent.close(), 3 * 1000);
+    }
+
     return {
-      isFullPage: true,
+      element,
+      isFullPage,
+      openLoading
     };
   },
-  methods: {
-    openLoading() {
-      const loadingComponent = this.$oruga.loading.open({
-        fullPage: this.isFullPage,
-        container: this.isFullPage ? null : this.$refs.element,
-      });
-      setTimeout(() => loadingComponent.close(), 3 * 1000);
-    },
-  },
-};
+});
 </script>

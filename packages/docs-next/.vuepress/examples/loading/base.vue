@@ -20,22 +20,26 @@
     </p>
   </section>
 </template>
-
 <script>
-export default {
-  data() {
+import { defineComponent, ref } from 'vue';
+
+export default defineComponent({
+  setup() {
+    const isLoading = ref(false);
+    const isFullPage = ref(true);
+
+    function openLoading() {
+      isLoading.value = true;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 10 * 1000);
+    }
+
     return {
-      isLoading: false,
-      isFullPage: true,
+      isLoading,
+      isFullPage,
+      openLoading
     };
   },
-  methods: {
-    openLoading() {
-      this.isLoading = true;
-      setTimeout(() => {
-        this.isLoading = false;
-      }, 10 * 1000);
-    },
-  },
-};
+});
 </script>
